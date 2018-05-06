@@ -1,5 +1,9 @@
 {
   "compileOnSave": false,
+  "include": [
+    "src/**/*",
+    "node_modules/highcharts-angular/src/app/*"
+  ],
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

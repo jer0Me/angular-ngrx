@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
+
 
 @Component({
   selector: 'app-highcharts',
   templateUrl: './highcharts.component.html',
-  styleUrls: ['./highcharts.component.css']
+  styleUrls: ['./highcharts.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HighchartsComponent implements OnInit {
 
