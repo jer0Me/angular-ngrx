@@ -27,6 +27,7 @@
     "@ngrx/store": "^5.2.0",
     "@ngrx/store-devtools": "^5.2.0",
     "@types/highcharts": "^5.0.22",
+    "@types/lodash": "^4.14.108",
     "core-js": "^2.4.1",
     "highcharts-angular": "^1.0.2",
     "lodash": "^4.17.10",
