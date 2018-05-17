@@ -1,8 +1,24 @@
+import { HighchartsState } from './index';
 
-import { ActionReducerMap} from '@ngrx/store';
-import { HighchartsState } from "../states/highcharts.state";
-import { mouseEventReducer } from "./mouseevent.reducer";
+import { ActionReducerMap, createFeatureSelector, createSelector} from '@ngrx/store';
+import { xAxisReducer, XAxisState } from './chart.reducer';
+
+export interface HighchartsState {
+    xAxisState: XAxisState;
+}
 
 export const reducers: ActionReducerMap<HighchartsState> = {
-    mouseEventState: mouseEventReducer
-}
+    xAxisState: xAxisReducer
+};
+
+export const getHighchartState = createFeatureSelector<HighchartsState>('highcharts');
+
+export const getXAxisState = createSelector(
+    getHighchartState,
+    highchartsState => highchartsState.xAxisState
+);
+
+export const getLastChartXValueMouseOver = createSelector(
+    getXAxisState,
+    state => state.lastChartXValueMouseOver
+);

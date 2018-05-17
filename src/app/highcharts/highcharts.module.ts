@@ -5,15 +5,18 @@ import { HighchartsComponent } from './highcharts.component';
 import { HighchartsRoutingModule } from './highcharts-routing.module';
 
 import { HighchartsChartComponent } from 'highcharts-angular';
-import { ChartComponent } from './components/chart/chart.component';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from './reducers/index';
+import { reducers } from './reducers';
+import { ChartComponent } from './components/chart/chart.component';
+import {EffectsModule} from '@ngrx/effects';
+import {ChartEffects} from './effects/chart-effect.service';
 
 @NgModule({
   imports: [
     CommonModule,
     HighchartsRoutingModule,
-    StoreModule.forFeature('mouseEvents', reducers)
+    StoreModule.forFeature('highcharts', reducers),
+    EffectsModule.forFeature([ChartEffects])
   ],
   declarations: [
     HighchartsComponent,
