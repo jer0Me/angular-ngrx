@@ -5,10 +5,9 @@ declare var require: any;
 import * as Highcharts from 'highcharts/highstock';
 require('highcharts/modules/boost')(Highcharts);
 
-import {BaseComponent} from '../../../base.component';
 import {getLastChartXValueMouseOver} from '../../reducers';
 import {Observable} from 'rxjs/Observable';
-import {Component, OnInit, ChangeDetectorRef, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, ChangeDetectionStrategy} from '@angular/core';
 import {Store, select} from '@ngrx/store';
 import {ChartObject} from 'highcharts/highstock';
 import {PointObject, SeriesObject, SeriesOptions} from 'highcharts';
@@ -22,8 +21,9 @@ import {Subscription} from 'rxjs/src/Subscription';
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChartComponent extends BaseComponent implements OnInit, OnDestroy {
+export class ChartComponent implements OnInit, OnDestroy {
   Highcharts;
   chartOptions: Highcharts.Options;
   chartConstructor: string;
@@ -31,8 +31,7 @@ export class ChartComponent extends BaseComponent implements OnInit, OnDestroy {
   lastChartXValueMouseOver: Observable<ChartXAxisValue>;
   lastChartXValueMouseOverSuscription: Subscription;
 
-  constructor(cd: ChangeDetectorRef, private highchartsStore: Store<HighchartsState>) {
-    super(cd);
+  constructor(private highchartsStore: Store<HighchartsState>) {
     this.lastChartXValueMouseOver = highchartsStore.pipe(select(getLastChartXValueMouseOver));
   }
 

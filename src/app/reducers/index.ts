@@ -1,23 +1,23 @@
 import {
   ActionReducer,
   ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
   MetaReducer
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
+import {layoutReducer, LayoutState} from './layout.reducer';
 
-export interface State {
-
+export interface AppState {
+  layoutState: LayoutState;
 }
 
-export const reducers: ActionReducerMap<State> = {
-
+export const reducers: ActionReducerMap<AppState> = {
+  layoutState: layoutReducer
 };
 
+
 // console.log all actions
-export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
-  return function(state: State, action: any): State {
+export function logger(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
+  return function(state: AppState, action: any): AppState {
     console.log('state', state);
     console.log('action', action);
 
@@ -26,4 +26,4 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 }
 
 
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
+export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [] : [];

@@ -1,6 +1,5 @@
 import {XAxisState} from './chart.reducer';
 import {ChartActionType} from '../actions/chart.action';
-
 import {PointActions} from '../actions/chart.action';
 
 export interface ChartXAxisValue {
