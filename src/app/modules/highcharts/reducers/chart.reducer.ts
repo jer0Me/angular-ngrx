@@ -1,30 +1,25 @@
-import {XAxisState} from './chart.reducer';
+import {ChartState} from './chart.reducer';
 import {ChartActionType} from '../actions/chart.action';
 import {PointActions} from '../actions/chart.action';
 
-export interface ChartXAxisValue {
-  chartIndex: number;
-  value: number;
+export interface ChartState {
+  pointMouseOverEvent: MouseEvent;
 }
 
-export interface XAxisState {
-  lastChartXValueMouseOver: ChartXAxisValue;
-}
-
-const xAxisInitialState: XAxisState = {
-  lastChartXValueMouseOver: null
+const chartInitialState: ChartState = {
+  pointMouseOverEvent: null
 };
 
-export function xAxisReducer(xAxisState: XAxisState = xAxisInitialState, pointAction: PointActions): XAxisState {
+export function chartStateReducer(chartState: ChartState = chartInitialState, pointAction: PointActions): ChartState {
   switch (pointAction.type) {
-    case ChartActionType.PointHighlight: {
+    case ChartActionType.PointMouseOver: {
       return {
-        ...xAxisState,
-        lastChartXValueMouseOver: pointAction.payload
+        ...chartState,
+        pointMouseOverEvent: pointAction.payload
       };
     }
     default: {
-      return xAxisState;
+      return chartState;
     }
   }
 }

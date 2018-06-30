@@ -1,26 +1,28 @@
 import {HighchartsState} from './index';
 
 import {ActionReducerMap, createFeatureSelector, createSelector} from '@ngrx/store';
-import {xAxisReducer, XAxisState} from './chart.reducer';
+import {chartStateReducer, ChartState} from './chart.reducer';
+
+import * as _ from 'lodash';
 
 export const HIGHCHARTS_STATE = 'highchartsState';
 
 export interface HighchartsState {
-  xAxisState: XAxisState;
+  chartState: ChartState;
 }
 
 export const reducers: ActionReducerMap<HighchartsState> = {
-  xAxisState: xAxisReducer
+  chartState: chartStateReducer
 };
 
 export const getHighchartState = createFeatureSelector<HighchartsState>(HIGHCHARTS_STATE);
 
-export const getXAxisState = createSelector(
+export const getChartState = createSelector(
   getHighchartState,
-  highchartsState => highchartsState.xAxisState
+  highchartsState => highchartsState.chartState
 );
 
-export const getLastChartXValueMouseOver = createSelector(
-  getXAxisState,
-  state => state.lastChartXValueMouseOver
+export const getPointXValue = createSelector(
+  getChartState,
+  state => !_.isNull(state.pointMouseOverEvent) ? <number>(<any>state.pointMouseOverEvent.target).x : null
 );

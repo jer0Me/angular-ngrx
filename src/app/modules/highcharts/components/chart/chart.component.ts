@@ -1,11 +1,9 @@
-import {ChartXAxisValue} from '../../reducers/chart.reducer';
-
 declare var require: any;
 
 import * as Highcharts from 'highcharts/highstock';
 require('highcharts/modules/boost')(Highcharts);
 
-import {getLastChartXValueMouseOver} from '../../reducers';
+import {getPointXValue} from '../../reducers';
 import {Observable} from 'rxjs/Observable';
 import {Component, OnInit, OnDestroy, ChangeDetectionStrategy} from '@angular/core';
 import {Store, select} from '@ngrx/store';
@@ -13,9 +11,8 @@ import {ChartObject} from 'highcharts/highstock';
 import {PointObject, SeriesObject, SeriesOptions} from 'highcharts';
 import * as PointActions from '../../actions/chart.action';
 import {HighchartsState} from '../../reducers';
-
 import * as _ from 'lodash';
-import {Subscription} from 'rxjs/src/Subscription';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-chart',
@@ -28,18 +25,18 @@ export class ChartComponent implements OnInit, OnDestroy {
   chartOptions: Highcharts.Options;
   chartConstructor: string;
   chart: ChartObject;
-  lastChartXValueMouseOver: Observable<ChartXAxisValue>;
+  pointXValue: Observable<number>;
   lastChartXValueMouseOverSuscription: Subscription;
 
   constructor(private highchartsStore: Store<HighchartsState>) {
-    this.lastChartXValueMouseOver = highchartsStore.pipe(select(getLastChartXValueMouseOver));
+    this.pointXValue = highchartsStore.pipe(select(getPointXValue));
   }
 
   ngOnInit() {
     this.initChartOptions();
-    this.lastChartXValueMouseOver.subscribe((lastPointMouseOver: ChartXAxisValue) => {
-      if (!_.isNull(lastPointMouseOver) && this.pointDoesNotBelongToTheCurrentChart(lastPointMouseOver)) {
-        this.mouseOverToPointThatHasTheSameXValue(lastPointMouseOver.value);
+    this.pointXValue.subscribe((pointXValue: number) => {
+      if (!_.isNull(pointXValue)) {
+        this.mouseOverToPointThatHasTheSameXValue(pointXValue);
       }
     });
   }
@@ -48,10 +45,6 @@ export class ChartComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.lastChartXValueMouseOverSuscription.unsubscribe();
-  }
-
-  private pointDoesNotBelongToTheCurrentChart(lastPointMouseOver: ChartXAxisValue) {
-    return lastPointMouseOver.chartIndex !== (<any>this.chart).index;
   }
 
   private initChartOptions() {
@@ -82,9 +75,10 @@ export class ChartComponent implements OnInit, OnDestroy {
         series: {
           point: {
             events: {
-              mouseOver: (event: any) => {
-                this.dispatchPointMouseOverAction(event);
-              }
+              mouseOver: _.debounce(
+                (event: any) => this.dispatchPointMouseOverAction(event),
+                500
+              )
             }
           }
         }
@@ -97,12 +91,7 @@ export class ChartComponent implements OnInit, OnDestroy {
   }
 
   private dispatchPointMouseOverAction(event: any) {
-    this.highchartsStore.dispatch(
-      new PointActions.PointMouseOver({
-        chartIndex: (<any>this.chart).index,
-        value: event.target.x
-      })
-    );
+    this.highchartsStore.dispatch(new PointActions.PointMouseOver(event));
   }
 
   private getSeries(): Array<SeriesOptions> {
@@ -127,7 +116,7 @@ export class ChartComponent implements OnInit, OnDestroy {
     return seriesData;
   }
 
-  private mouseOverToPointThatHasTheSameXValue(lastChartXAxisValue: number): void {
+  private mouseOverToPointThatHasTheSameXValue(pointXValue: number): void {
     // We need only the first series visible because once we trigger
     // the mouse over event of one of its point, automatically all points in the
     // in the same position will be highlighted.
@@ -135,7 +124,7 @@ export class ChartComponent implements OnInit, OnDestroy {
 
     if (!_.isUndefined(firstSeriesVisible)) {
       firstSeriesVisible.data.forEach((point: PointObject) => {
-        if (point.x === lastChartXAxisValue) {
+        if (point.x === pointXValue) {
           (<any>point).onMouseOver();
           return;
         }
