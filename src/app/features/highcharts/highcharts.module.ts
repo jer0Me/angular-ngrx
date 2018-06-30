@@ -9,7 +9,7 @@ import {StoreModule} from '@ngrx/store';
 import {HIGHCHARTS_STATE, reducers} from './reducers';
 import {ChartComponent} from './components/chart/chart.component';
 import {EffectsModule} from '@ngrx/effects';
-import {ChartEffects} from './effects/chart-effect.service';
+import {ChartEffects} from './effects/chart.effects';
 import {MatCardModule, MatGridListModule} from '@angular/material';
 
 @NgModule({

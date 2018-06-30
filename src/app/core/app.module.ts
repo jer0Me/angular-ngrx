@@ -7,7 +7,7 @@ import {AppComponent} from './app.component';
 import {StoreModule} from '@ngrx/store';
 import {reducers, metaReducers} from './reducers';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
-import {environment} from '../environments/environment';
+import {environment} from '../../environments/environment';
 import {EffectsModule} from '@ngrx/effects';
 import {SidenavComponent} from './components/sidenav/sidenav.component';
 import {MatButtonModule, MatIconModule, MatListModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
