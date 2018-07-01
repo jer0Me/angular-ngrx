@@ -1,16 +1,14 @@
-import {HighchartsState} from './index';
-
-import {ActionReducerMap, createFeatureSelector, createSelector} from '@ngrx/store';
-import {chartStateReducer, ChartState} from './chart.reducer';
+import {ActionReducerMap, createFeatureSelector} from '@ngrx/store';
+import * as fromChart from './chart.reducer';
 
 export const HIGHCHARTS_STATE = 'highchartsState';
 
-export interface HighchartsState {
-  chartState: ChartState;
+export interface State {
+  chartState: fromChart.State;
 }
 
-export const reducers: ActionReducerMap<HighchartsState> = {
-  chartState: chartStateReducer
+export const reducers: ActionReducerMap<State> = {
+  chartState: fromChart.reducer
 };
 
-export const getHighchartState = createFeatureSelector<HighchartsState>(HIGHCHARTS_STATE);
+export const getHighchartState = createFeatureSelector<State>(HIGHCHARTS_STATE);

@@ -1,12 +1,12 @@
-import { Action } from '@ngrx/store';
+import {Action} from '@ngrx/store';
 
-export enum ChartActionType {
-    PointMouseOver = '[Highcharts] Point mouse over',
-}
+export const POINT_MOUSE_OVER = '[Highcharts] Point mouse over';
 
 export class PointMouseOver implements Action {
-    readonly type: string = ChartActionType.PointMouseOver;
-    constructor(public payload: MouseEvent) {}
+  readonly type: string = POINT_MOUSE_OVER;
+
+  constructor(public payload: MouseEvent) {
+  }
 }
 
-export type PointActions = PointMouseOver;
+export type ChartAction = PointMouseOver;

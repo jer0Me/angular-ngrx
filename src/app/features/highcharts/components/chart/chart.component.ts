@@ -3,15 +3,15 @@ declare var require: any;
 import * as Highcharts from 'highcharts/highstock';
 require('highcharts/modules/boost')(Highcharts);
 
-import {getPointXValue} from '../../selectors/chart.selectors';
+import * as fromChartSelectors from '../../selectors/chart.selectors';
 
 import {Observable} from 'rxjs/Observable';
 import {Component, OnInit, OnDestroy, ChangeDetectionStrategy} from '@angular/core';
 import {Store, select} from '@ngrx/store';
 import {ChartObject} from 'highcharts/highstock';
 import {PointObject, SeriesObject, SeriesOptions} from 'highcharts';
-import * as PointActions from '../../actions/chart.action';
-import {HighchartsState} from '../../reducers';
+import * as fromChartActions from '../../actions/chart.action';
+import * as fromHighcharts from '../../reducers';
 import * as _ from 'lodash';
 import {Subscription} from 'rxjs/Subscription';
 
@@ -29,8 +29,8 @@ export class ChartComponent implements OnInit, OnDestroy {
   pointXValue: Observable<number>;
   lastChartXValueMouseOverSuscription: Subscription;
 
-  constructor(private highchartsStore: Store<HighchartsState>) {
-    this.pointXValue = highchartsStore.pipe(select(getPointXValue));
+  constructor(private highchartsStore: Store<fromHighcharts.State>) {
+    this.pointXValue = highchartsStore.pipe(select(fromChartSelectors.getPointXValue));
   }
 
   ngOnInit() {
@@ -92,7 +92,7 @@ export class ChartComponent implements OnInit, OnDestroy {
   }
 
   private dispatchPointMouseOverAction(event: any) {
-    this.highchartsStore.dispatch(new PointActions.PointMouseOver(event));
+    this.highchartsStore.dispatch(new fromChartActions.PointMouseOver(event));
   }
 
   private getSeries(): Array<SeriesOptions> {

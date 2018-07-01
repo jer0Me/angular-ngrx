@@ -1,25 +1,22 @@
-import {ChartState} from './chart.reducer';
-import {ChartActionType} from '../actions/chart.action';
-import {PointActions} from '../actions/chart.action';
+import * as fromChartActions from '../actions/chart.action';
 
-export interface ChartState {
+export interface State {
   pointMouseOverEvent: MouseEvent;
 }
 
-const chartInitialState: ChartState = {
+export const initialState: State = {
   pointMouseOverEvent: null
 };
 
-export function chartStateReducer(chartState: ChartState = chartInitialState, pointAction: PointActions): ChartState {
-  switch (pointAction.type) {
-    case ChartActionType.PointMouseOver: {
+export function reducer(chartState: State = initialState, action: fromChartActions.ChartAction): State {
+  switch (action.type) {
+    case fromChartActions.POINT_MOUSE_OVER: {
       return {
         ...chartState,
-        pointMouseOverEvent: pointAction.payload
+        pointMouseOverEvent: action.payload
       };
     }
-    default: {
-      return chartState;
-    }
   }
+
+  return chartState;
 }
