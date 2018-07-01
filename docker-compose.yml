@@ -1,0 +1,14 @@
+version: '3.6'
+
+services:
+  node:
+    build:
+      context: .
+      dockerfile: node.Dockerfile
+    volumes:
+      - ./code:/code
+    tty: true
+    ports:
+      - 80:4200
+    environment:
+      TZ: Europe/London

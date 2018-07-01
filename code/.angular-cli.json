@@ -54,6 +54,10 @@
     }
   },
   "defaults": {
+    "serve": {
+      "host": "0.0.0.0"
+    },
+    "poll": 1000,
     "styleExt": "css",
     "component": {
     },
