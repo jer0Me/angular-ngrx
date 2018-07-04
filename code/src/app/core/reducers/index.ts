@@ -4,16 +4,15 @@ import {
   MetaReducer
 } from '@ngrx/store';
 import { environment } from '../../../environments/environment';
-import {layoutReducer, LayoutState} from './layout.reducer';
+import * as fromSidebar from './sidebar.reducer';
 
 export interface AppState {
-  layoutState: LayoutState;
+  sidebarState: fromSidebar.State;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-  layoutState: layoutReducer
+  sidebarState: fromSidebar.reducer
 };
-
 
 // console.log all actions
 export function logger(reducer: ActionReducer<AppState>): ActionReducer<AppState> {

@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import * as LayoutActions from '../../actions/layout.action';
+import * as LayoutActions from '../../actions/sidebar.action';
 import {AppState} from '../../reducers';
 
 @Component({
@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
   }
 
   openSidenav(): void {
-    this.store.dispatch(new LayoutActions.OpenSidenav());
+    this.store.dispatch(new LayoutActions.Open());
   }
 
 }

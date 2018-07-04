@@ -3,7 +3,7 @@ declare var require: any;
 import * as Highcharts from 'highcharts/highstock';
 require('highcharts/modules/boost')(Highcharts);
 
-import * as fromChartSelectors from '../../selectors/chart.selectors';
+import * as fromChartSelectors from '../../selectors/chart.selector';
 
 import {Observable} from 'rxjs/Observable';
 import {Component, OnInit, OnDestroy, ChangeDetectionStrategy} from '@angular/core';
