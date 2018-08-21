@@ -5,7 +5,7 @@ require('highcharts/modules/boost')(Highcharts);
 
 import * as fromChartSelectors from '../../selectors/chart.selector';
 
-import {Observable} from 'rxjs/Observable';
+import {Observable, Subscription} from 'rxjs';
 import {Component, OnInit, OnDestroy, ChangeDetectionStrategy} from '@angular/core';
 import {Store, select} from '@ngrx/store';
 import {ChartObject} from 'highcharts/highstock';
@@ -13,7 +13,6 @@ import {PointObject, SeriesObject, SeriesOptions} from 'highcharts';
 import * as fromChartActions from '../../actions/chart.action';
 import * as fromHighcharts from '../../reducers';
 import * as _ from 'lodash';
-import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-chart',
