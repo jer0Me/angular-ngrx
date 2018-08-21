@@ -1,1 +1,1 @@
-Angular 5 with ngrx platform
+Angular 6 with ngrx platform
