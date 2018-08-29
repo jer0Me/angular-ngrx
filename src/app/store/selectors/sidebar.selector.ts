@@ -1,5 +1,5 @@
-import * as fromRoot from '../reducers';
-import * as fromSidebar from '../reducers/sidebar.reducer'
+import * as fromRoot from '../reducers/index';
+import * as fromSidebar from '../reducers/sidebar.reducer';
 import {createSelector} from '@ngrx/store';
 
 export const getSidebarState = (state: fromRoot.AppState) => state.sidebarState;

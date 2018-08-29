@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import * as LayoutActions from '../../actions/sidebar.action';
-import {AppState} from '../../reducers';
+import * as LayoutActions from '@app/store/actions/sidebar.action';
+import {AppState} from '@app/store/reducers';
 
 @Component({
   selector: 'app-navbar',

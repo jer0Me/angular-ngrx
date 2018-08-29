@@ -16,5 +16,5 @@ describe('Sidebar Reducer', () => {
   it('should set showSidebar to false with Close action', () => {
     const state = fromSidebar.reducer(fromSidebar.initialState, new fromSidebarActions.Close());
     expect(state.showSidenav).toEqual(false);
-  })
+  });
 });

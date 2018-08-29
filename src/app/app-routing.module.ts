@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: 'highcharts',
-    loadChildren: '../features/highcharts/highcharts.module#HighchartsModule'
+    loadChildren: './features/highcharts/highcharts.module#HighchartsModule'
   },
   {
     path: '',

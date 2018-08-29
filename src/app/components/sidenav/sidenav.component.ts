@@ -1,9 +1,9 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
 import {select, Store} from '@ngrx/store';
-import {AppState} from '../../reducers';
-import * as fromSidebarSelectors from '../../selectors/sidebar.selector';
-import * as fromSidebarActions from '../../actions/sidebar.action';
+import {AppState} from '@app/store/reducers';
+import * as fromSidebarSelectors from '../../store/selectors/sidebar.selector';
+import * as fromSidebarActions from '../../store/actions/sidebar.action';
 
 @Component({
   selector: 'app-sidenav',

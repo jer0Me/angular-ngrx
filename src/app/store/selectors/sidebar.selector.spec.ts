@@ -15,6 +15,6 @@ describe('Sidebar Selector', () => {
       {sidebarState: fromSidebar.initialState}
     );
     expect(sidebarState).toBe(fromSidebar.initialState.showSidenav);
-  })
+  });
 
 });
