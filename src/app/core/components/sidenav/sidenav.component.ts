@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable} from 'rxjs/internal/Observable';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
 import * as fromSidebarSelectors from '../../selectors/sidebar.selector';

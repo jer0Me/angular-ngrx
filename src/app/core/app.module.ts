@@ -10,41 +10,36 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../../environments/environment';
 import {EffectsModule} from '@ngrx/effects';
 import {SidenavComponent} from './components/sidenav/sidenav.component';
-import {MatButtonModule, MatIconModule, MatListModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
-import {CdkTableModule} from '@angular/cdk/table';
-import {LayoutModule} from '@angular/cdk/layout';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {AppEffects} from './effects/app.effects';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SidenavComponent,
-    NavbarComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    StoreModule.forRoot(reducers, {metaReducers}),
-    EffectsModule.forRoot([AppEffects]),
-    // Instrumentation must be imported after importing StoreModule (config is optional)
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production, // Restrict extension to log-only mode
-    }),
-    LayoutModule,
-    CdkTableModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        SidenavComponent,
+        NavbarComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+
+        SharedModule,
+
+        StoreModule.forRoot(reducers, {metaReducers}),
+        EffectsModule.forRoot([AppEffects]),
+
+        // Instrumentation must be imported after importing StoreModule (config is optional)
+        StoreDevtoolsModule.instrument({
+            maxAge: 25, // Retains last 25 states
+            logOnly: environment.production, // Restrict extension to log-only mode
+        }),
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
