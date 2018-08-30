@@ -9,7 +9,7 @@ import {HIGHCHARTS_STATE, reducers} from './reducers';
 import {ChartComponent} from './components/chart/chart.component';
 import {EffectsModule} from '@ngrx/effects';
 import {ChartEffects} from './effects/chart.effects';
-import {SharedModule} from '@app/shared';
+import {SharedModule} from '@shared/shared.module';
 
 @NgModule({
     imports: [

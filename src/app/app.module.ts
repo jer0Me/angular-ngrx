@@ -13,7 +13,7 @@ import {SidenavComponent} from './components/sidenav/sidenav.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {AppEffects} from './store/effects/app.effects';
-import {SharedModule} from '@app/shared';
+import {SharedModule} from '@shared/shared.module';
 
 
 @NgModule({

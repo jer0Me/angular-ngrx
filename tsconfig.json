@@ -22,6 +22,7 @@
     ],
     "paths": {
       "@app/*": ["app/*"],
+      "@shared/*": ["app/shared/*"],
       "@highcharts/*": ["app/features/highcharts/*"]
     }
   }
