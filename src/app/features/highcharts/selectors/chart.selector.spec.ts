@@ -11,7 +11,7 @@ describe('Chart selectors', () => {
   });
 
   it('should select pointXValue', () => {
-    const xValue: number = 10;
+    const xValue = 10;
     const mouseEvent = {
       target: {x: xValue}
     };
@@ -26,6 +26,6 @@ describe('Chart selectors', () => {
       }
     );
     expect(pointXValue).toBe(xValue);
-  })
+  });
 
 });

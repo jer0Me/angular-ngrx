@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:prod" : "ng build --prod --build-optimizer --vendor-chunk --common-chunk",
+    "build:prod": "ng build --prod --build-optimizer --vendor-chunk --common-chunk",
     "clean": "rimraf ./dist/",
     "test": "ng test",
     "lint": "ng lint",
