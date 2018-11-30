@@ -11,4 +11,4 @@ export const reducers: ActionReducerMap<State> = {
   chartState: fromChart.reducer
 };
 
-export const getHighchartState = createFeatureSelector<State>(HIGHCHARTS_STATE);
+export const selectHighchartState = createFeatureSelector<State>(HIGHCHARTS_STATE);

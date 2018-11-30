@@ -33,7 +33,7 @@ export class ChartComponent implements OnInit, OnDestroy {
     lastChartXValueMouseOverSuscription: Subscription;
 
     constructor(private highchartsStore: Store<fromHighcharts.State>) {
-        this.pointXValue = highchartsStore.pipe(select(fromChartSelectors.getPointXValue));
+        this.pointXValue = highchartsStore.pipe(select(fromChartSelectors.selectPointXValue));
     }
 
     ngOnInit() {

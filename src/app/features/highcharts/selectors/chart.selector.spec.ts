@@ -4,28 +4,37 @@ import * as fromChartSelectors from './chart.selector';
 describe('Chart selectors', () => {
 
   it('should select chartState', () => {
-    const chartState: fromChart.State = fromChartSelectors.getChartState(
-      {highchartsState: {chartState: fromChart.initialState}}
-    );
-    expect(chartState).toBe(fromChart.initialState);
+    expect(
+      fromChartSelectors.selectChartState.projector(
+        {
+          chartState: fromChart.initialState
+        }
+      )
+    ).toBe(fromChart.initialState);
+  });
+
+  it('should select pointMouseOverEvent', () => {
+    const mouseEvent = {
+        x: 1
+    };
+
+    expect(
+      fromChartSelectors.selectPointMouseOverEvent.projector({
+          pointMouseOverEvent: mouseEvent
+      })
+    ).toBe(mouseEvent);
+
   });
 
   it('should select pointXValue', () => {
     const xValue = 10;
-    const mouseEvent = {
-      target: {x: xValue}
-    };
-    const pointXValue: number = fromChartSelectors.getPointXValue(
-      {
-        highchartsState: {
-          chartState: {
-            ...fromChart.initialState,
-            pointMouseOverEvent: mouseEvent
+    expect(
+      fromChartSelectors.selectPointXValue.projector(
+          {
+            target: {x: xValue}
           }
-        }
-      }
-    );
-    expect(pointXValue).toBe(xValue);
+      )
+    ).toBe(xValue);
   });
 
 });

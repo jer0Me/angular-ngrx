@@ -1,4 +1,5 @@
 import * as fromChartActions from '../actions/chart.action';
+import produce from 'immer';
 
 export interface State {
   pointMouseOverEvent: MouseEvent;
@@ -8,15 +9,11 @@ export const initialState: State = {
   pointMouseOverEvent: null
 };
 
-export function reducer(chartState: State = initialState, action: fromChartActions.ChartAction): State {
-  switch (action.type) {
-    case fromChartActions.POINT_MOUSE_OVER: {
-      return {
-        ...chartState,
-        pointMouseOverEvent: action.payload
-      };
+export const reducer = (state: State = initialState, action: fromChartActions.ChartAction) =>
+  produce<State>(state, draft  => {
+    switch (action.type) {
+      case fromChartActions.ChartActionTypes.PointMouseOver: {
+        (<any>draft).pointMouseOverEvent = action.payload;
+      }
     }
-  }
-
-  return chartState;
-}
+  });
